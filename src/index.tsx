@@ -1,9 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
 
-const { RNNativeToastLibrary } = NativeModules;
-
-export default RNNativeToastLibrary;
-
 const LINKING_ERROR =
   `The package 'react-native-rakuten-rewark' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -21,6 +17,21 @@ const RakutenRewark = NativeModules.RakutenRewark
       }
     );
 
+export default RakutenRewark;
+export { RakutenRewark };
+
 export function multiply(a: number, b: number): Promise<number> {
   return RakutenRewark.multiply(a, b);
+}
+
+export function toast(a: string) {
+  return RakutenRewark.toast(a);
+}
+
+export function showL(a: string) {
+  return RakutenRewark.showL(a);
+}
+
+export function showS(a: string) {
+  return RakutenRewark.showS(a);
 }
