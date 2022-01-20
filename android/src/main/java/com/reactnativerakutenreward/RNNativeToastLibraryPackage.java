@@ -10,6 +10,7 @@ package com.reactnativerakutenreward;
         import com.facebook.react.bridge.ReactApplicationContext;
         import com.facebook.react.uimanager.ViewManager;
         import com.facebook.react.bridge.JavaScriptModule;
+        
 public class RNNativeToastLibraryPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
