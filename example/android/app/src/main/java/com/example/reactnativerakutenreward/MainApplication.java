@@ -11,6 +11,8 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.reactnativerakutenreward.RakutenRewardPackage;
+import com.reactnativerakutenreward.MyAppPackage;
+import com.reactnativerakutenreward.RNNativeToastLibraryPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,6 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for RakutenRewardExample:
           // packages.add(new MyReactNativePackage());
           packages.add(new RakutenRewardPackage());
+          packages.add(new MyAppPackage());
+          packages.add(new RNNativeToastLibraryPackage());
           return packages;
         }
 
