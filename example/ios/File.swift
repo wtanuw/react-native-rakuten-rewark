@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  RakutenRewardExample
+//  RakutenRewarkExample
 //
 
 import Foundation

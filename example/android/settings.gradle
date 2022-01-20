@@ -1,6 +1,6 @@
-rootProject.name = 'RakutenRewardExample'
+rootProject.name = 'RakutenRewarkExample'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
-include ':reactnativerakutenreward'
-project(':reactnativerakutenreward').projectDir = new File(rootProject.projectDir, '../../android')
+include ':reactnativerakutenrewark'
+project(':reactnativerakutenrewark').projectDir = new File(rootProject.projectDir, '../../android')

@@ -1,17 +1,17 @@
-# react-native-rakuten-reward
+# react-native-rakuten-rewark
 
-use rakuten reward
+rewark
 
 ## Installation
 
 ```sh
-npm install react-native-rakuten-reward
+npm install react-native-rakuten-rewark
 ```
 
 ## Usage
 
 ```js
-import { multiply } from "react-native-rakuten-reward";
+import { multiply } from "react-native-rakuten-rewark";
 
 // ...
 
