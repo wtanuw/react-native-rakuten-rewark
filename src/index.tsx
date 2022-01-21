@@ -1,32 +1,32 @@
-// import { NativeModules, Platform } from 'react-native';
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
-// const LINKING_ERROR =
-//   `The package 'react-native-rakuten-rewark' doesn't seem to be linked. Make sure: \n\n` +
-//   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-//   '- You rebuilt the app after installing the package\n' +
-//   '- You are not using Expo managed workflow\n';
+const LINKING_ERROR =
+  `The package 'react-native-rakuten-rewark' doesn't seem to be linked. Make sure: \n\n` +
+  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
+  '- You rebuilt the app after installing the package\n' +
+  '- You are not using Expo managed workflow\n';
 
-// const RakutenRewark = NativeModules.RakutenRewark
-//   ? NativeModules.RakutenRewark
-//   : new Proxy(
-//       {},
-//       {
-//         get() {
-//           throw new Error(LINKING_ERROR);
-//         },
-//       }
-//     );
+const RakutenRewark = NativeModules.RakutenRewark
+  ? NativeModules.RakutenRewark
+  : new Proxy(
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
 
 // export default RakutenRewark;
 // export { RakutenRewark };
 
-const { RakutenRewark } = NativeModules
+// const { RakutenRewark } = NativeModules
 // interface CalendarInterface {
 //    toast(message);
 // }
 // export default RakutenRewark as CalendarInterface;
 export default RakutenRewark
+export {RakutenRewark}
 
 export function mmultiply(a: number, b: number): Promise<number> {
   return RakutenRewark.multiply(a, b);
