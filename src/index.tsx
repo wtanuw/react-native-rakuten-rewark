@@ -21,10 +21,11 @@ const LINKING_ERROR =
 // export { RakutenRewark };
 
 const { RakutenRewark } = NativeModules
-interface CalendarInterface {
-   toast(message);
-}
-export default RakutenRewark as CalendarInterface;
+// interface CalendarInterface {
+//    toast(message);
+// }
+// export default RakutenRewark as CalendarInterface;
+export default RakutenRewark
 
 export function mmultiply(a: number, b: number): Promise<number> {
   return RakutenRewark.multiply(a, b);
