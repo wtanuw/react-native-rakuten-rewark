@@ -32,6 +32,10 @@ export function mmultiply(a: number, b: number): Promise<number> {
   return RakutenRewark.multiply(a, b);
 }
 
+export function show(a: string) {
+  return RakutenRewark.show(a);
+}
+
 export function ttoast(a: string) {
   return RakutenRewark.toast(a);
 }

@@ -61,4 +61,9 @@ RCT_EXPORT_METHOD(showS:(NSString *)text)
     [self.toast showToast:text duration:2.0];
 }
 
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
 @end
