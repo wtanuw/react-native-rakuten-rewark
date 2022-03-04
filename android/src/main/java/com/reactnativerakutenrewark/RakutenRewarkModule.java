@@ -12,6 +12,21 @@ import com.facebook.react.module.annotations.ReactModule;
 
 import com.ahmedadeltito.photoeditor.PhotoEditorActivity;
 
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.BaseActivityEventListener;
+import com.facebook.react.bridge.Callback;
+// import com.facebook.react.bridge.ReactApplicationContext;
+// import com.facebook.react.bridge.ReactContextBaseJavaModule;
+// import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+
+import java.util.ArrayList;
+
 @ReactModule(name = RakutenRewarkModule.NAME)
 public class RakutenRewarkModule extends ReactContextBaseJavaModule {
     public static final String NAME = "RakutenRewark";

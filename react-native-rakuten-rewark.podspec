@@ -17,9 +17,10 @@ Pod::Spec.new do |s|
   s.swift_version = '4.2'
 
   s.source_files = "ios/**/*.{h,m,mm}", "ios/Photo Editor/*.{swift}"
-  s.exclude_files = "Photo Editor/AppDelegate.swift"
-  s.resources = "Photo Editor/*.{png,jpeg,jpg,storyboard,xib,ttf}"
+  s.exclude_files = "ios/Photo Editor/AppDelegate.swift"
+  s.resources = "ios/Photo Editor/*.{png,jpeg,jpg,storyboard,xib,ttf}"
 
   s.dependency "React-Core"
   s.dependency 'RakutenRewardSDK'
+  # s.dependency 'iOSPhotoEditor'
 end
