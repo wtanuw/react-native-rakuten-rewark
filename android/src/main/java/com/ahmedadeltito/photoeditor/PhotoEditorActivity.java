@@ -67,7 +67,7 @@ import java.util.UUID;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
 
-import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
 
 public class PhotoEditorActivity extends AppCompatActivity implements View.OnClickListener, OnPhotoEditorSDKListener {
 

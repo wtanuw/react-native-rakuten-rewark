@@ -1,6 +1,9 @@
 
 #import "RNPhotoEditor.h"
 
+#import "react_native_rakuten_rewark-Swift.h" //Swift code is inside the project
+// #import <react_native_rakuten_rewark/react_native_rakuten_rewark-Swift.h> //Swift code is inside a Module
+
 @implementation RNPhotoEditor
 
 - (dispatch_queue_t)methodQueue

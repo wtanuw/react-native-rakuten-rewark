@@ -3,7 +3,7 @@ package com.ahmedadeltito.photoeditor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
 public class MainActivity extends MediaActivity {
 
     @Override

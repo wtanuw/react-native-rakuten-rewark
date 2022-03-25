@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import android.util.Log;
-import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
 /**
  * Created by Ahmed Adel on 09/06/2017.
  */

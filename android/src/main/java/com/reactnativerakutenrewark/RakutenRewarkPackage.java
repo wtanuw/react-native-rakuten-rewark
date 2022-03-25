@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.facebook.react.bridge.JavaScriptModule;
+
 public class RakutenRewarkPackage implements ReactPackage {
     @NonNull
     @Override
