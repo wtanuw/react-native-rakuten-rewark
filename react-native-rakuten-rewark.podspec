@@ -22,5 +22,5 @@ Pod::Spec.new do |s|
 
   s.dependency "React-Core"
   s.dependency 'RakutenRewardSDK'
-  # s.dependency 'iOSPhotoEditor'
+  s.dependency 'iOSPhotoEditor'
 end
