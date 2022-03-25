@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.List;
-import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R; //import ui.photoeditor.R;
 
 /**
  * Created by Ahmed Adel on 5/4/17.

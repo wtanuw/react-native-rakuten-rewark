@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R; //import ui.photoeditor.R;
 
 /**
  * Created by Ahmed Adel on 5/8/17.

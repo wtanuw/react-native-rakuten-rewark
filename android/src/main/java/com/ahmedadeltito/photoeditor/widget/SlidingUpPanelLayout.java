@@ -24,7 +24,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
-import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R; //import ui.photoeditor.R;
 import com.nineoldandroids.view.animation.AnimatorProxy;
 
 public class SlidingUpPanelLayout extends ViewGroup {

@@ -22,7 +22,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R; //import ui.photoeditor.R;
 
 /**
  * A realtime blurring overlay (like iOS UIVisualEffectView). Just put it above

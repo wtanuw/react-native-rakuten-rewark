@@ -1,6 +1,6 @@
 {
   "name": "react-native-rakuten-rewark",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "rewark",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -14,7 +14,6 @@
     "ios",
     "cpp",
     "react-native-rakuten-rewark.podspec",
-    "RakutenRewark.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",

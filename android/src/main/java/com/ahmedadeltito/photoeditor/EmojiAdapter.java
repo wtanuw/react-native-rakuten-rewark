@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import com.reactnativerakutenrewark.R //import ui.photoeditor.R;
+import com.reactnativerakutenrewark.R; //import ui.photoeditor.R;
 
 /**
  * Created by Ahmed Adel on 5/5/17.
