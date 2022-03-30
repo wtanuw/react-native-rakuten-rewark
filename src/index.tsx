@@ -105,7 +105,8 @@ export class PhotoEditor {
             colors = this.defaultProps.colors
         }
 
-        RNPhotoEditor.Edit(
+        if (Platform.OS === 'ios') {
+          RNPhotoEditor.Edit(
             { colors, hiddenControls, stickers, ...props },
             (imagePath: string) => {
                 onDone && onDone(imagePath)
@@ -113,6 +114,17 @@ export class PhotoEditor {
             (resultCode: number) => {
                 onCancel && onCancel(resultCode)
             }
-        )
+          )
+        } else {
+          RakutenRewark.Edit(
+            { colors, hiddenControls, stickers, ...props },
+            (imagePath: string) => {
+                onDone && onDone(imagePath)
+            },
+            (resultCode: number) => {
+                onCancel && onCancel(resultCode)
+            }
+          )
+        }
     }
 }
