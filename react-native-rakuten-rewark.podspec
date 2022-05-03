@@ -16,8 +16,16 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.swift_version = '4.2'
 
-  s.source_files = "ios/**/*.{h,m,mm}", "ios/Photo Editor/*.{swift}"
-  s.exclude_files = "ios/Photo Editor/AppDelegate.swift"
+  s.source_files = 
+  # "ios/**/*.{h,m,mm}", 
+  "ios/Photo Editor/*.{swift}",
+  "ios/croppicker/*.{h,m,mm}", 
+  "ios/rakuten/*.{h,m,mm}", 
+  "ios/TOCropViewController/**/*.{h,m}",
+  "ios/toast/*.{h,m,mm}", 
+  s.exclude_files = 
+  "ios/Photo Editor/AppDelegate.swift",
+  'ios/TOCropViewController/include/**/*.h'
   s.resources = "ios/Photo Editor/*.{png,jpeg,jpg,storyboard,xib,ttf}"
 
   s.dependency "React-Core"
@@ -27,7 +35,7 @@ Pod::Spec.new do |s|
 
   # s.dependency 'React-Core'
   s.dependency 'React-RCTImage'
-  s.dependency 'TOCropViewController'
+  # s.dependency 'TOCropViewController'
 
   s.subspec 'QBImagePickerController' do |qb|
     qb.name             = "QBImagePickerController"
