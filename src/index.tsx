@@ -128,3 +128,14 @@ export class PhotoEditor {
         }
     }
 }
+
+/* ImageCropPicker */
+
+const ImageCropPicker = NativeModules.ImageCropPicker;
+
+export {ImageCropPicker};
+export const openPicker = ImageCropPicker.openPicker;
+export const openCamera = ImageCropPicker.openCamera;
+export const openCropper = ImageCropPicker.openCropper;
+export const clean = ImageCropPicker.clean;
+export const cleanSingle = ImageCropPicker.cleanSingle;
