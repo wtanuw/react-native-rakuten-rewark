@@ -1,4 +1,5 @@
-package com.reactnative.ivpusic.imagepicker;
+// package com.reactnative.ivpusic.imagepicker;
+package com.reactnativerakutenrewark;
 
 import android.app.Activity;
 import android.content.Context;

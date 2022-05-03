@@ -19,6 +19,7 @@ public class RakutenRewarkPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new RakutenRewarkModule(reactContext));
+        modules.add(new PickerModule(reactContext));
         return modules;
     }
 
