@@ -87,8 +87,8 @@ export interface PickerSelectProps {
     InputAccessoryView?: React.ReactNode;
 }
 
-// declare class Picker extends React.Component<PickerSelectProps> {
-//     togglePicker: (animate?: boolean, postToggleCallback?: () => void) => void;
-// }
+export class Picker extends React.Component<PickerSelectProps> {
+    togglePicker: (animate?: boolean, postToggleCallback?: () => void) => void;
+}
 
 export default Picker;
