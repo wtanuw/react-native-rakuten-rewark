@@ -1,5 +1,5 @@
-<!-- <resources>
-    <string name="overlay">Date Picker Overlay</string>
+<resources>
+    <!-- <string name="overlay">Date Picker Overlay</string>
     <string name="year_description">Select Year</string>
     <string name="month_description">Select Month</string>
     <string name="date_description">Select Date</string>
@@ -9,5 +9,5 @@
     <string name="ampm_description">Select AM/PM</string>
     <string name="time_tag">Time is</string>
     <string name="hour_tag">Hour :</string>
-    <string name="minutes_tag">Minutes </string>
-</resources> -->
+    <string name="minutes_tag">Minutes </string> -->
+</resources>

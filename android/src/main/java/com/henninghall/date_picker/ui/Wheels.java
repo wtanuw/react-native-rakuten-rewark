@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.pickers.Picker;
-import com.henninghall.date_picker.R;
+import com.reactnativerakutenrewark.R; //import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.models.Mode;

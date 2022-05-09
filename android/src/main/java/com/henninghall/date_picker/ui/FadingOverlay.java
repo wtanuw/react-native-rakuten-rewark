@@ -5,7 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.henninghall.date_picker.R;
+import com.reactnativerakutenrewark.R; //import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
 
 public class FadingOverlay {

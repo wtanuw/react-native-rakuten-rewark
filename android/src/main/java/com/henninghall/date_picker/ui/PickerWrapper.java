@@ -3,7 +3,7 @@ package com.henninghall.date_picker.ui;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.henninghall.date_picker.R;
+import com.reactnativerakutenrewark.R; //import com.henninghall.date_picker.R;
 
 class PickerWrapper {
     private final LinearLayout view;
