@@ -1,4 +1,4 @@
-package com.henninghall.date_picker;
+package com.reactnativerakutenrewark; //package com.henninghall.date_picker;
 
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;

@@ -1,5 +1,4 @@
-// package com.reactnative.ivpusic.imagepicker;
-package com.reactnativerakutenrewark;
+package com.reactnativerakutenrewark; //package com.reactnative.ivpusic.imagepicker;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;

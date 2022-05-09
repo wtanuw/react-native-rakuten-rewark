@@ -1,4 +1,4 @@
-package com.henninghall.date_picker.wheelFunctions;
+package com.reactnativerakutenrewark; //package com.henninghall.date_picker.wheelFunctions;
 
 import android.graphics.Color;
 

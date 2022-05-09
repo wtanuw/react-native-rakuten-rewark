@@ -1,4 +1,4 @@
-package com.henninghall.date_picker.ui;
+package com.reactnativerakutenrewark; //package com.henninghall.date_picker.ui;
 
 import android.content.Context;
 import android.os.Build;
@@ -8,7 +8,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.accessibilityservice.AccessibilityServiceInfo;
 
-import com.henninghall.date_picker.DatePickerPackage;
+// import com.henninghall.date_picker.DatePickerPackage;
+import com.reactnativerakutenrewark.RakutenRewarkPackage;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.pickers.Picker;
 

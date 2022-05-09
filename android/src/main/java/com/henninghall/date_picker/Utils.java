@@ -1,4 +1,4 @@
-package com.henninghall.date_picker;
+package com.reactnativerakutenrewark; //package com.henninghall.date_picker;
 
 
 import android.text.format.DateFormat;

@@ -1,4 +1,4 @@
-package com.henninghall.date_picker;
+package com.reactnativerakutenrewark; //package com.henninghall.date_picker;
 
 import java.util.EnumMap;
 import java.util.HashMap;

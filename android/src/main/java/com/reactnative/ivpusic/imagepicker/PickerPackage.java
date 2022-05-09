@@ -1,5 +1,4 @@
 // // package com.reactnative.ivpusic.imagepicker;
-// package com.reactnativerakutenrewark;
 
 // import com.facebook.react.ReactPackage;
 // import com.facebook.react.bridge.JavaScriptModule;

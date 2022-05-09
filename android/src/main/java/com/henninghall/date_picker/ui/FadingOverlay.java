@@ -1,4 +1,4 @@
-package com.henninghall.date_picker.ui;
+package com.reactnativerakutenrewark; //package com.henninghall.date_picker.ui;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
