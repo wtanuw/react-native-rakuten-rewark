@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="android_native_theme">
+    <!-- <style name="android_native_theme">
         <item name="android:textSize" tools:ignore="SpUsage">17sp</item>
     </style>
     <style name="android_native">
@@ -13,5 +13,5 @@
     </style>
     <style name="android_native_small" parent="android_native">
         <item name="android:layout_width">40dp</item>
-    </style>
+    </style> -->
 </resources>
