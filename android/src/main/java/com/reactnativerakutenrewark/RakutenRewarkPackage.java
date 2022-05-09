@@ -20,12 +20,17 @@ public class RakutenRewarkPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new RakutenRewarkModule(reactContext));
         modules.add(new PickerModule(reactContext));
+        modules.add(new DatePickerModule(reactContext));
         return modules;
     }
 
     @NonNull
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        // return Collections.emptyList();
+        context = reactContext;
+        return Arrays.<ViewManager> asList(
+                new DatePickerManager()
+        );
     }
 }

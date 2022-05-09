@@ -16,13 +16,18 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.swift_version = '4.2'
 
+  # https://github.com/prscX/react-native-photo-editor
+  # https://github.com/ivpusic/react-native-image-crop-picker
+  # https://github.com/henninghall/react-native-date-picker
+  # https://github.com/TimOliver/TOCropViewController
   s.source_files = 
   # "ios/**/*.{h,m,mm}", 
+  "ios/toast/*.{h,m,mm}",
+  "ios/rakuten/*.{h,m,mm}", 
   "ios/Photo Editor/*.{swift}",
   "ios/croppicker/*.{h,m,mm}", 
-  "ios/rakuten/*.{h,m,mm}", 
   "ios/TOCropViewController/**/*.{h,m}",
-  "ios/toast/*.{h,m,mm}", 
+  "ios/RNDatePicker/*.{h,m}",
   s.exclude_files = 
   "ios/Photo Editor/AppDelegate.swift",
   'ios/TOCropViewController/include/**/*.h'

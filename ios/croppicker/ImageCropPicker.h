@@ -36,7 +36,7 @@
 #endif
 
 
-#import <TOCropViewController/TOCropViewController.h>
+#import "TOCropViewController.h"
 
 #import "UIImage+Resize.h"
 #import "UIImage+Extension.h"
