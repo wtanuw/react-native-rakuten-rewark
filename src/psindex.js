@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 import { Picker } from '@react-native-picker/picker';
 import { defaultStyles } from './psstyles';
-
 export default class RNPickerSelect extends PureComponent {
     static propTypes = {
         onValueChange: PropTypes.func.isRequired,
