@@ -1,4 +1,4 @@
-<resources>
+<!-- <resources>
     <string name="overlay">Date Picker Overlay</string>
     <string name="year_description">Select Year</string>
     <string name="month_description">Select Month</string>
@@ -10,4 +10,4 @@
     <string name="time_tag">Time is</string>
     <string name="hour_tag">Hour :</string>
     <string name="minutes_tag">Minutes </string>
-</resources>
+</resources> -->
