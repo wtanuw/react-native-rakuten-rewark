@@ -23,31 +23,16 @@ Pod::Spec.new do |s|
   s.source_files = 
   # "ios/**/*.{h,m,mm}", 
   "ios/toast/*.{h,m,mm}",
-  "ios/rakuten/*.{h,m,mm}", 
-  "ios/Photo Editor/*.{swift}",
-  "ios/croppicker/*.{h,m,mm}", 
-  "ios/TOCropViewController/**/*.{h,m}",
-  "ios/RNDatePicker/*.{h,m}",
-  s.exclude_files = 
-  "ios/Photo Editor/AppDelegate.swift",
-  'ios/TOCropViewController/include/**/*.h'
-  s.resources = "ios/Photo Editor/*.{png,jpeg,jpg,storyboard,xib,ttf}"
+  "ios/rakuten/*.{h,m,mm}",
+  # s.exclude_files = 
+  # "ios/Photo Editor/AppDelegate.swift",
+  # 'ios/TOCropViewController/include/**/*.h'
+  # s.resources = "ios/Photo Editor/*.{png,jpeg,jpg,storyboard,xib,ttf}"
 
   s.dependency "React-Core"
   s.dependency 'RakutenRewardSDK'
 
-  s.dependency 'iOSPhotoEditor'
-
   # s.dependency 'React-Core'
   s.dependency 'React-RCTImage'
   # s.dependency 'TOCropViewController'
-
-  s.subspec 'QBImagePickerController' do |qb|
-    qb.name             = "QBImagePickerController"
-    qb.source_files     = "ios/QBImagePicker/QBImagePicker/*.{h,m}"
-    qb.exclude_files    = "ios/QBImagePicker/QBImagePicker/QBImagePicker.h"
-    qb.resource_bundles = { "QBImagePicker" => "ios/QBImagePicker/QBImagePicker/*.{lproj,storyboard}" }
-    qb.requires_arc     = true
-    qb.frameworks       = "Photos"
-  end
 end
