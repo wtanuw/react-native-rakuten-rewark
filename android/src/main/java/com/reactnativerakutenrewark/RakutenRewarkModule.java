@@ -10,8 +10,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 
-import com.ahmedadeltito.photoeditor.PhotoEditorActivity;
-
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.Callback;
@@ -33,7 +31,7 @@ public class RakutenRewarkModule extends ReactContextBaseJavaModule {
 
     public RakutenRewarkModule(ReactApplicationContext reactContext) {
         super(reactContext);
-    reactContext.addActivityEventListener(mActivityEventListener);
+    // reactContext.addActivityEventListener(mActivityEventListener);
     }
 
     @Override

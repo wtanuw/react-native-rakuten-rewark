@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source_files = 
   # "ios/**/*.{h,m,mm}", 
   "ios/toast/*.{h,m,mm}",
-  "ios/rakuten/*.{h,m,mm}",
+  "ios/rakuten/*.{h,m,mm}"
   # s.exclude_files = 
   # "ios/Photo Editor/AppDelegate.swift",
   # 'ios/TOCropViewController/include/**/*.h'
