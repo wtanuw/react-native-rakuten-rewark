@@ -47,6 +47,7 @@ repositories {
     maven {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
         url("$rootDir/../node_modules/react-native/android")
+        url "https://raw.github.com/Rakuten-Reward-SDK/Reward-SDK-Android/master" 
     }
     google()
     mavenCentral()
@@ -73,4 +74,7 @@ dependencies {
            strictly '0.10.3'
        }
    }
+  //  implementation 'jp.co.rakuten.reward.rewardsdk:rewardsdk:+'
+   compileOnly files('rewardsdk-5.7.1.aar')      
+   implementation 'com.android.support:appcompat-v7:27.0.0'    
 }

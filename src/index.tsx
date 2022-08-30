@@ -10,7 +10,7 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-const RakutenRewark = NativeModules.RakutenRewark
+  const RakutenRewark = NativeModules.RakutenRewark
   ? NativeModules.RakutenRewark
   : new Proxy(
       {},
@@ -20,6 +20,16 @@ const RakutenRewark = NativeModules.RakutenRewark
         },
       }
     );
+    const RakutenRewarkMission = NativeModules.RakutenRewarkMission
+      ? NativeModules.RakutenRewarkMission
+      : new Proxy(
+          {},
+          {
+            get() {
+              throw new Error(LINKING_ERROR);
+            },
+          }
+        );
 
 // export default RakutenRewark;
 // export { RakutenRewark };
@@ -31,6 +41,7 @@ const RakutenRewark = NativeModules.RakutenRewark
 // export default RakutenRewark as CalendarInterface;
 export default RakutenRewark
 export {RakutenRewark}
+export {RakutenRewarkMission}
 
 /* Toast */
 
@@ -52,6 +63,22 @@ export function sshowL(a: string) {
 
 export function sshowS(a: string) {
   return RakutenRewark.showS(a);
+}
+
+export function startSessionWithAppCode(a: string) {
+  return RakutenRewark.startSessionWithAppCode(a);
+}
+
+export function logActionWithActionCode(a: string) {
+  return RakutenRewark.logActionWithActionCode(a);
+}
+
+export function openPortal(a: string) {
+  return RakutenRewark.openPortal(a);
+}
+
+export function getUnclaimed(a: string) {
+  return RakutenRewark.getUnclaimed(a);
 }
 
 /* Rakuten */
