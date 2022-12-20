@@ -34,14 +34,16 @@ public class RakutenReAct extends RakutenRewardBaseActivity {
 public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // ...
+    RakutenRewardLifecycle.onCreate(this);
 }
-
 @Override
 public void onStart() {
     super.onStart();
     // ...
         // RakutenReward.getInstance().setListener(this);
-        // RakutenRewardLifecycle.onStart(this);
+        RakutenRewardLifecycle.onStart(this);
+    RakutenRewardAds.initialize("anAuY28ucmFrdXRlbi5yZXdhcmQuYW5kcm9pZC1SVGlhQWhrV0J+NHVEVnY3QkNSdF96b2NYZ2cten5TSQ==");
+
 }
 
 @Override
@@ -61,6 +63,18 @@ public void onDestroy() {
     super.onDestroy();
     // ...
 }
+    public void onUserUpdated(RakutenRewardUser rakutenRewardUser) {
+      
+     }
+
+    public void onUnclaimedAchievement(MissionAchievementData missionAchievementData) { 
+      
+     }
+
+    public void onSDKStateChanged(Status status) {
+      if (status == Status.ONLINE) {
+      }
+    }
 
 
     public static RakutenReAct ob() {
@@ -77,14 +91,13 @@ public void onDestroy() {
       RakutenReward.getInstance().logAction(actionCode);
     }
     public static String getAppCode(Context context) {
-        String actionCode = "sdsdad";
+        String actionCode = "getAppCode";
     return RakutenRewardAds.getAppCode();
       
       }
     public void openPortal(Context context, Activity activity) {
         String actionCode = "openPortal";
     // RakutenRewardAds.initialize("vnbtjtewr");
-    // RakutenRewardLifecycle.onCreate(activity);
     // RakutenRewardLifecycle.onStart(activity);
     // RakutenRewardLifecycle.onResume(activity);
     // RakutenRewardLifecycle.onPause(activity);
@@ -97,17 +110,17 @@ public void onDestroy() {
       if (success) {
 
       }
-    Toast.makeText(context, actionCode+success, Toast.LENGTH_SHORT).show();
+    // Toast.makeText(context, actionCode+success, Toast.LENGTH_SHORT).show();
     }
     public void openAdPortal(Context context, Activity activity) {
         String actionCode = "openAdPortal";
-    RakutenRewardAds.initialize("openAdPortal");
+    RakutenRewardAds.initialize("anAuY28ucmFrdXRlbi5yZXdhcmQuYW5kcm9pZC1SVGlhQWhrV0J+NHVEVnY3QkNSdF96b2NYZ2cten5TSQ==");
     // RakutenRewardLifecycle.onCreate(activity);
     RakutenRewardLifecycle.onStart(activity);
       boolean success = RakutenReward.getInstance().openAdPortal(activity);
       // boolean success = RakutenReward.getInstance().openSignin();
       // if (success) {
-        Toast.makeText(context, actionCode+success, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(context, actionCode+success, Toast.LENGTH_SHORT).show();
       // }
     }
     public void openSignin(Context context, Activity activity) {
@@ -121,7 +134,7 @@ public void onDestroy() {
       // boolean success = RakutenReward.getInstance().openAdPortal(context);
       // boolean success = RakutenReward.getInstance().openSignin();
       // boolean success = false;
-      Toast.makeText(context, actionCode+success, Toast.LENGTH_SHORT).show();
+      // Toast.makeText(context, actionCode+success, Toast.LENGTH_SHORT).show();
       RewardConfiguration.getInstance().setLocation(false);
       // RakutenReward.getInstance().openSignin();
 

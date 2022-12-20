@@ -6,7 +6,9 @@ import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
@@ -29,12 +31,16 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import android.content.pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 // import java.util.ReadableMap;
 // import java.util.Array;
 // // import java.util.;
 // import org.json.simple.JSONObject;
 // import org.json.simple.JSONArray;
+import com.reactnativerakutenrewark.RakutenRewarkListener;
 
 import com.facebook.react.bridge.LifecycleEventListener;
 
@@ -46,10 +52,15 @@ import jp.co.rakuten.reward.rewardsdk.api.status.Status;
 import jp.co.rakuten.reward.rewardsdk.api.data.RakutenRewardUser;
 import jp.co.rakuten.reward.rewardsdk.api.activity.RakutenRewardLifecycle;
 import jp.co.rakuten.reward.rewardsdk.api.RakutenRewardAds;
-
+import jp.co.rakuten.reward.rewardsdk.api.data.MissionAchievementData;
+import jp.co.rakuten.reward.rewardsdk.api.listener.RakutenRewardListener;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.ReactInstanceManager;
 
 @ReactModule(name = RakutenRewarkModule.NAME)
-public class RakutenRewarkModule extends ReactContextBaseJavaModule {
+public class RakutenRewarkModule extends ReactContextBaseJavaModule implements RakutenRewardListener  {
     public static final String NAME = "RakutenRewark";
 
     public RakutenRewarkModule(ReactApplicationContext reactContext) {
@@ -179,29 +190,172 @@ public void createCalendarEventp(String name, String location, Promise promise) 
     } catch(Exception e) {
         promise.reject("Create Event Error", e);
     }
-}
+  }
 
-@ReactMethod
-public void createCalendarEventc(String name, String location, Callback callBack) {
-       callBack.invoke(name);
-}
+  private ReactContext mReactContext;
+
+  public RakutenRewarkModule(ReactContext reactContext) {
+      mReactContext = reactContext;
+  }
+
+  private void sendEvent(ReactContext reactContext,
+                        String eventName,
+                        WritableMap params) {
+  reactContext
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+      .emit(eventName, params);
+  }
+
+  @ReactMethod
+  public void addListener(String eventName) {
+    // Set up any upstream listeners or background tasks as necessary
+  }
+
+  @ReactMethod
+  public void removeListeners(Integer count) {
+    // Remove upstream listeners, stop unnecessary background tasks
+  }
+  
+  public void onUnclaimedAchievement(MissionAchievementData var1)
+    {
+      ReactApplicationContext context = getReactApplicationContext();
+      // Toast.makeText(context, "111", Toast.LENGTH_SHORT).show();
+      WritableMap params = extractArchievement(var1);
+      sendEvent(context, "didUpdateUnclaimedAchievement", params);
+    }
+
+    public void onUserUpdated(RakutenRewardUser var1)
+    {
+      ReactApplicationContext context = getReactApplicationContext();
+      // Toast.makeText(context, "222", Toast.LENGTH_SHORT).show();
+      WritableMap params = extractUser(var1);
+      sendEvent(context, "didUpdateUser", params);
+    }
+
+    public void onSDKStateChanged(Status var1)
+    {
+      ReactApplicationContext context = getReactApplicationContext();
+      // Toast.makeText(context, "333", Toast.LENGTH_SHORT).show();
+      WritableMap params = extractStatus(var1);
+      sendEvent(context, "didSDKStateChange", params);
+    }
+
+  @ReactMethod
+  public void createCalendarEventc(String name, String location, Callback callBack) {
+        callBack.invoke(name);
+  }
 
   @ReactMethod
   public void startSessionWithAppCode(String name) {
     Context context = getReactApplicationContext();
+    // "anAuY28ucmFrdXRlbi5yZXdhcmQuaW9zLXdZRU4zRVJYOW9QeTFLT2pVWlVQb1c3dHowOGVjS2Zq"
     // Toast.makeText(context, "123", Toast.LENGTH_SHORT).show();
       //  callBack.invoke("123");
+  }
+  @ReactMethod
+  public void reactStartSessionWithDelegate() {
+    Context context = getReactApplicationContext();
+    // "anAuY28ucmFrdXRlbi5yZXdhcmQuaW9zLXdZRU4zRVJYOW9QeTFLT2pVWlVQb1c3dHowOGVjS2Zq"
+    RakutenReward.getInstance().setListener(this);
   }
 
   @ReactMethod
   public void reactLogActionWithActionCode(String name) {
     Context context = getReactApplicationContext();
-    Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
-      //  callBack.invoke("123");
+    RakutenReward.getInstance().logAction(name);
+  }
+
+// - (NSDictionary*)extractArchievement:(MissionAchievementData*)mission
+// {
+//     NSMutableDictionary *dict = [NSMutableDictionary new];
+//     if (mission) {
+// //        dict[@"claim"] = [NSNumber numberWithLong:[mission claim]];
+//         dict[@"getAction"] = [mission getAction];
+//         dict[@"getInstruction"] = [mission getInstruction];
+//         dict[@"getIconUrl"] = [mission getIconUrl];
+//         dict[@"getNotificationType"] = [mission getNotificationType];
+//         dict[@"getName"] = [mission getName];
+// //        dict[@"getAchievedDate"] = [mission getAchievedDate];
+//         dict[@"getPoint"] = [NSNumber numberWithBool:[mission getPoint]];
+//         dict[@"isCustom"] = [NSNumber numberWithBool:[mission isCustom]];
+// //        dict[@"setActionWithAction"] = [NSNumber numberWithLong:[mission setActionWithAction]];
+// //        dict[@"setAchievedDateStrWithAchievedDateStr"] = [NSNumber numberWithLong:[mission setAchievedDateStrWithAchievedDateStr]];
+        
+//     }
+//     return dict;
+// },
+  public WritableMap extractStatus(Status status) {      
+    WritableMap params = Arguments.createMap();
+    if (status == Status.ONLINE) {
+      params.putString("statusEnum", ""+status);
+      params.putString("statusName", "RakutenRewardStatusOnline");
+    } else if (status == Status.OFFLINE) {
+      params.putString("statusEnum", ""+status);
+      params.putString("statusName", "RakutenRewardStatusOffline");
+    } else if (status == Status.APPCODEINVALID) {
+      params.putString("statusEnum", ""+status);
+      params.putString("statusName", "RakutenRewardStatusAppCodeInvalid");
+    } else {
+
+    }
+    return params;
+  }
+
+  public WritableMap extractArchievement(MissionAchievementData mission) {      
+    WritableMap params = Arguments.createMap();
+    if (mission!=null) {
+      // for (MissionAchievementData *mission in [user getAchievementsList]) {
+      //       [misssionArray addObject:[self extractArchievement:mission]];
+      //   }
+      //   dict[@"getAchievementsList"] = misssionArray;
+    }
+    return params;
+  }
+
+  public WritableMap extractUser(RakutenRewardUser user) {      
+    WritableMap params = Arguments.createMap();
+    if (user!=null) {
+      params.putString("isSignin", ""+user.isSignin());
+      params.putString("getUnclaimed", ""+user.getUnclaimed());
+      params.putString("getPoint", ""+user.getPoint());
+      // for (MissionAchievementData *mission in [user getAchievementsList]) {
+      //       [misssionArray addObject:[self extractArchievement:mission]];
+      //   }
+      //   dict[@"getAchievementsList"] = misssionArray;
+    }
+    return params;
   }
 
   @ReactMethod
   public void reactGetInfo(Callback callBack) {
+    Context context = getReactApplicationContext();
+    // Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+      RakutenRewardUser user = RakutenReAct.getUser(context);
+
+      WritableMap map = Arguments.createMap();
+      map.putString("yourKey", "yourValue");
+      map.putString("appCode", ""+RakutenReAct.getAppCode(context));
+      map.putString("version", ""+RakutenReAct.getVersion(context));
+      map.putString("status", ""+RakutenReAct.getStatus(context));
+      map.putString("statusName", ""+RakutenReAct.getStatus(context));
+      map.putString("isOptedOut", ""+RakutenReAct.isOptedOut(context));
+      map.putString("isUIEnabled", ""+RakutenReAct.isUIEnabled(context));
+      if (user!=null) {
+      map.putString("getPoint", ""+user.getPoint());
+      map.putString("getUnclaimed", ""+user.getUnclaimed());
+      map.putString("isSignin", ""+user.isSignin());
+      }
+
+      // Map<String, String> dictionary = new HashMap<String, String>();
+      // dictionary.put("key1", ""+user.getUnclaimed());
+      // dictionary.put("key2", ""+user.getPoint());
+      // dictionary.put("key3", ""+user.isSignin());
+      callBack.invoke(map);
+        
+
+  }
+  @ReactMethod
+  public void reactIsSignin(Callback callBack) {
     Context context = getReactApplicationContext();
     // Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
       RakutenRewardUser user = RakutenReAct.getUser(context);
@@ -216,13 +370,15 @@ public void createCalendarEventc(String name, String location, Callback callBack
       if (user!=null) {
       map.putString("getPoint", ""+user.getPoint());
       map.putString("getUnclaimed", ""+user.getUnclaimed());
-      map.putString("isSignin", ""+user.isSignin());
+      callBack.invoke(user.isSignin());
+      } else {
+
+      callBack.invoke(false);
       }
       // Map<String, String> dictionary = new HashMap<String, String>();
       // dictionary.put("key1", ""+user.getUnclaimed());
       // dictionary.put("key2", ""+user.getPoint());
       // dictionary.put("key3", ""+user.isSignin());
-      callBack.invoke(map);
         
 
   }
@@ -230,6 +386,7 @@ public void createCalendarEventc(String name, String location, Callback callBack
   @ReactMethod
   public void reactOnStart() {
     final Activity activity = getCurrentActivity();
+    RakutenRewardAds.initialize("anAuY28ucmFrdXRlbi5yZXdhcmQuYW5kcm9pZC1SVGlhQWhrV0J+NHVEVnY3QkNSdF96b2NYZ2cten5TSQ==");
     RakutenRewardLifecycle.onStart(activity);
   }
   
@@ -247,15 +404,17 @@ public void createCalendarEventc(String name, String location, Callback callBack
     RakutenReward.getInstance().openPortal();
   }
 
+  RakutenRewarkListener mListener;
   @ReactMethod
   public void mainActivityOpenPortal() {
     Context context = getReactApplicationContext();
     Context reactContext = getReactApplicationContext();
     final Activity activity = getCurrentActivity();
-    final RakutenRewarkListener listener = (RakutenRewarkListener)activity;
-    listener.onUnclaimedAchievement();
+    // final RakutenRewarkListener listener = (RakutenRewarkListener)activity;
+    mListener =  (RakutenRewarkListener)activity;
+// Toast.makeText(context, "listener"+mListener, Toast.LENGTH_SHORT).show();
+    mListener.openPortal();
       //  callBack.invoke("123");
-Toast.makeText(context, "listener"+listener, Toast.LENGTH_SHORT).show();
 
   }
   @ReactMethod
@@ -286,8 +445,24 @@ Toast.makeText(context, "listener"+listener, Toast.LENGTH_SHORT).show();
     final Activity activity = getCurrentActivity();
       //  callBack.invoke("123");
 
+   
+    try {
+        // ApplicationInfo app = this.getPackageManager().getApplicationInfo("com.example.name", 0);        
+        // Drawable icon = packageManager.getApplicationIcon(app);
+        // String name = packageManager.getApplicationLabel(app);
+
+        ApplicationInfo app = context.getPackageManager().getApplicationInfo(context.getPackageName(),PackageManager.GET_META_DATA);
+        Bundle bundle = app.metaData;
+        String texst = bundle.getString("jp.co.rakuten.rewardsdk.appcode");
+        // Toast.makeText(context, texst, Toast.LENGTH_SHORT).show();
+    } catch (NameNotFoundException e) {
+        Toast toast = Toast.makeText(context, "error in getting icon", Toast.LENGTH_SHORT);
+        toast.show();
+        e.printStackTrace();
+    }
         // RakutenReAct raku = RakutenReAct.ob();
         // raku.openSignin(context, activity);
+    // RakutenReward.getInstance().openSignin();
 
     // start(activity, 100);
     // LifecycleEventListener lifecycleEventListener = new LifecycleEventListener() {

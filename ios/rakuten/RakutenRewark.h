@@ -1,4 +1,5 @@
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
 @protocol RakutenRewardDelegate;
 @protocol RakutenRewardSessionDelegate;
@@ -6,9 +7,9 @@
 #import <RakutenRewardSDK/RakutenRewardSDK-Swift.h>
 @class User;
 
-@interface RakutenRewark : NSObject <RCTBridgeModule>
+@interface RakutenRewark : RCTEventEmitter <RCTBridgeModule, RakutenRewardDelegate>
 
-+ (void)startSessionWithAppCode:(NSString *)appCode;
++ (void)startSessionWithAppCode:(NSString * _Nonnull)appCode;
 
 @end
 
@@ -26,7 +27,7 @@
 
 @interface RakutenRewark(RakutenReward)
 
-- (void)startSessionWithAppCode:(NSString *)appCode;
+- (void)startSessionWithAppCode:(NSString * _Nonnull)appCode;
 - (void)logActionWithActionCode:(NSString * _Nonnull)actionCode;
 - (void)logActionWithActionCode:(NSString * _Nonnull)actionCode isQueueEnabled:(BOOL)isQueueEnabled;
 - (void)openPortal;

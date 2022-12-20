@@ -1,6 +1,6 @@
 {
   "name": "react-native-rakuten-rewark",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "rewark",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

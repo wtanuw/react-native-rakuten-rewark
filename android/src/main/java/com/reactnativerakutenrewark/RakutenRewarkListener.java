@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
   // Implementation of methods is not available
 
 public interface RakutenRewarkListener {
+    void openPortal();
     void onUnclaimedAchievement();
     // void onUnclaimedAchievement(data.MissionAchievementData missionAchievementData);
 
@@ -37,3 +38,13 @@ public interface RakutenRewarkListener {
 
     // void onSDKStateChanged(jp.co.rakuten.reward.rewardsdk.api.status.Status status);
 }
+// public class MyCustomObject {
+//   // Step 1 - This interface defines the type of messages I want to communicate to my owner  
+//   public interface MyCustomObjectListener {
+//       // These methods are the different events and 
+//       // need to pass relevant arguments related to the event triggered
+//       public void onObjectReady(String title);
+//       // or when data has been loaded
+//       public void onDataLoaded(SomeData data);
+//   }
+// }

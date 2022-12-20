@@ -5,6 +5,7 @@
 @interface RakutenRewark()
 
 @property (nonatomic, retain) IOSNativeToast *toast;
+@property (nonatomic, assign) BOOL hasListeners;
 
 @end
 
@@ -64,14 +65,22 @@ RCT_EXPORT_METHOD(showS:(NSString *)text)
 
 +(void)startSessionWithAppCode:(NSString *)appCode
 {
-  [[RakutenReward sharedInstance] startSessionWithAppCode:appCode];
+    [[RakutenReward sharedInstance] startSessionWithAppCode:appCode];
+    [RakutenReward sharedInstance].delegate = self;
 }
 
 
 RCT_EXPORT_METHOD(reactStartSessionWithAppCode:(NSString *)appCode)
 {
+    [RakutenReward sharedInstance].delegate = self;
     [self startSessionWithAppCode:appCode];
 }
+
+RCT_EXPORT_METHOD(reactStartSessionWithDelegate)
+{
+    [RakutenReward sharedInstance].delegate = self;
+}
+
 
 RCT_EXPORT_METHOD(reactGetInfo:(RCTResponseSenderBlock)callback)
 {
@@ -84,10 +93,24 @@ RCT_EXPORT_METHOD(reactGetInfo:(RCTResponseSenderBlock)callback)
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[@"appCode"] = appCode;
     dict[@"version"] = version;
-    dict[@"status"] = [NSNumber numberWithInt:status];
+    dict[@"status"] = [NSNumber numberWithInteger:status];
     dict[@"isOptedOut"] = [NSNumber numberWithBool:isOptedOut];
     dict[@"isUIEnabled"] = [NSNumber numberWithBool:isUIEnabled];
     
+    dict[@"status2"] = [self extractStatus:status];
+    
+    User *user = [[RakutenReward sharedInstance] getUser];
+    
+    dict[@"user"] = [self extractUser:user];
+    
+    callback(@[dict]);
+}
+
+- (NSDictionary*)extractStatus:(RakutenRewardStatus)status
+{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    
+    dict[@"statusEnum"] = [NSNumber numberWithInteger:status];
     if (status == RakutenRewardStatusOnline) {
         dict[@"statusName"] = @"RakutenRewardStatusOnline";
     } else if (status == RakutenRewardStatusOffline) {
@@ -95,18 +118,60 @@ RCT_EXPORT_METHOD(reactGetInfo:(RCTResponseSenderBlock)callback)
     } else if (status == RakutenRewardStatusAppCodeInvalid) {
         dict[@"statusName"] = @"RakutenRewardStatusAppCodeInvalid";
     }
-
     
+    return dict;
+}
+
+- (NSDictionary*)extractArchievement:(MissionAchievementData*)mission
+{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    if (mission) {
+//        dict[@"claim"] = [NSNumber numberWithLong:[mission claim]];
+        dict[@"getAction"] = [mission getAction];
+        dict[@"getInstruction"] = [mission getInstruction];
+        dict[@"getIconUrl"] = [mission getIconUrl];
+        dict[@"getNotificationType"] = [mission getNotificationType];
+        dict[@"getName"] = [mission getName];
+//        dict[@"getAchievedDate"] = [mission getAchievedDate];
+        dict[@"getPoint"] = [NSNumber numberWithBool:[mission getPoint]];
+        dict[@"isCustom"] = [NSNumber numberWithBool:[mission isCustom]];
+//        dict[@"setActionWithAction"] = [NSNumber numberWithLong:[mission setActionWithAction]];
+//        dict[@"setAchievedDateStrWithAchievedDateStr"] = [NSNumber numberWithLong:[mission setAchievedDateStrWithAchievedDateStr]];
+        
+    }
+    return dict;
+}
+
+- (NSDictionary*)extractUser:(User*)user
+{
+    NSLog(@"%@",user);
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    if (user) {
+        dict[@"isSignin"] = [NSNumber numberWithBool:[user isSignin]];
+        dict[@"getUnclaimed"] = [NSNumber numberWithLong:[user getUnclaimed]];
+        dict[@"getPoint"] = [NSNumber numberWithLong:[user getPoint]];
+        NSArray *getAchievementsList = [user getAchievementsList];
+        NSMutableArray *misssionArray = [NSMutableArray new];
+        for (MissionAchievementData *mission in [user getAchievementsList]) {
+            [misssionArray addObject:[self extractArchievement:mission]];
+        }
+        dict[@"getAchievementsList"] = misssionArray;
+    }
+    return dict;
+}
+
+RCT_EXPORT_METHOD(reactIsSignin:(RCTResponseSenderBlock)callback)
+{
     User *user = [[RakutenReward sharedInstance] getUser];
-        if (user) {
-            dict[@"getPoint"] = [NSNumber numberWithLong:[user getPoint]];
-            dict[@"getUnclaimed"] = [NSNumber numberWithLong:[user getUnclaimed]];
-            dict[@"isSignin"] = [NSNumber numberWithBool:[user isSignin]];
-            dict[@"getAchievementsList"] = [user getAchievementsList];
-            
-        } else {
-      }
-      callback(@[dict]);
+    if (user) {
+        
+        callback(@[[NSNumber numberWithBool:[user isSignin]]]);
+
+        
+    } else {
+        
+        callback(@[[NSNumber numberWithBool:NO]]);
+    }
 }
 
 RCT_EXPORT_METHOD(reactLogActionWithActionCode:(NSString *)actionCode)
@@ -115,6 +180,10 @@ RCT_EXPORT_METHOD(reactLogActionWithActionCode:(NSString *)actionCode)
 }
 
 RCT_EXPORT_METHOD(reactOnStart)
+{
+}
+
+RCT_EXPORT_METHOD(reactAddsInit:(NSString *)actionCode)
 {
 }
 
@@ -136,6 +205,33 @@ RCT_EXPORT_METHOD(reactOpenAdPortal)
 RCT_EXPORT_METHOD(reactOpenSignin)
 {
     [self openSignin];
+}
+
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[ @"didSDKStateChange",
+              @"didUpdateUnclaimedAchievement",
+              @"didUpdateUser"];
+}
+
+// Will be called when this module's first listener is added.
+-(void)startObserving {
+    _hasListeners = YES;
+    // Set up any upstream listeners or background tasks as necessary
+}
+
+// Will be called when this module's last listener is removed, or on dealloc.
+-(void)stopObserving {
+    _hasListeners = NO;
+    // Remove upstream listeners, stop unnecessary background tasks
+}
+
+- (void)calendarEventReminderReceived:(NSNotification *)notification
+{
+  NSString *eventName = notification.userInfo[@"name"];
+  if (_hasListeners) { // Only send events if anyone is listening
+    [self sendEventWithName:@"EventReminder" body:@{@"name": eventName}];
+  }
 }
 
 //RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
@@ -621,16 +717,26 @@ RCT_EXPORT_METHOD(reactOpenSignin)
 - (void)didSDKStateChange:(enum RakutenRewardStatus)status
 {
     NSLog(@"111");
+    if (_hasListeners) { // Only send events if anyone is listening
+      [self sendEventWithName:@"didSDKStateChange" body:@{@"status": [NSNumber numberWithInteger:status]}];
+    }
 }
 
 - (void)didUpdateUnclaimedAchievement:(MissionAchievementData * _Nonnull)missionAchievement
 {
     NSLog(@"222");
+    // dos something here
+    if (_hasListeners) { // Only send events if anyone is listening
+      [self sendEventWithName:@"didUpdateUnclaimedAchievement" body:@{@"name": [self extractArchievement:missionAchievement]}];
+    }
 }
 
 - (void)didUpdateUser:(User * _Nonnull)user
 {
     NSLog(@"333");
+    if (_hasListeners) { // Only send events if anyone is listening
+        [self sendEventWithName:@"didUpdateUser" body:@{@"user": [self extractUser:user]}];
+    }
 }
 
 @end
