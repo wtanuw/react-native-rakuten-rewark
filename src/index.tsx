@@ -20,16 +20,16 @@ const LINKING_ERROR =
         },
       }
     );
-    const RakutenRewarkMission = NativeModules.RakutenRewarkMission
-      ? NativeModules.RakutenRewarkMission
-      : new Proxy(
-          {},
-          {
-            get() {
-              throw new Error(LINKING_ERROR);
-            },
-          }
-        );
+    // const RakutenRewarkMission = NativeModules.RakutenRewarkMission
+    //   ? NativeModules.RakutenRewarkMission
+    //   : new Proxy(
+    //       {},
+    //       {
+    //         get() {
+    //           throw new Error(LINKING_ERROR);
+    //         },
+    //       }
+    //     );
 
 // export default RakutenRewark;
 // export { RakutenRewark };
@@ -41,7 +41,7 @@ const LINKING_ERROR =
 // export default RakutenRewark as CalendarInterface;
 export default RakutenRewark
 export {RakutenRewark}
-export {RakutenRewarkMission}
+// export {RakutenRewarkMission}
 
 /* Toast */
 
